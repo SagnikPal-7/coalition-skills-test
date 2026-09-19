@@ -1,21 +1,48 @@
-function LabResults() {
+function DownloadIcon() {
   return (
-    <section className="lab-results">
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d="M12 3v12" />
+      <path d="m7 10 5 5 5-5" />
+      <path d="M5 20h14" />
+    </svg>
+  );
+}
 
-      <h2>Lab Results</h2>
+function LabResults({ results }) {
+  return (
+    <section className="panel lab-panel">
+      <h2 className="section-title">
+        Lab Results
+      </h2>
 
-      <div>
-        Blood Tests
-      </div>
+      {!results.length ? (
+        <p className="empty-state">
+          No lab results available.
+        </p>
+      ) : (
+        <div className="lab-results-list">
+          {results.map(
+            (result, index) => (
+              <div
+                className="lab-result-row"
+                key={`${result}-${index}`}
+              >
+                <span>{result}</span>
 
-      <div>
-        CT Scans
-      </div>
-
-      <div>
-        Radiology Reports
-      </div>
-
+                <span
+                  className="download-icon"
+                  aria-hidden="true"
+                >
+                  <DownloadIcon />
+                </span>
+              </div>
+            )
+          )}
+        </div>
+      )}
     </section>
   );
 }

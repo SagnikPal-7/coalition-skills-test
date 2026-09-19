@@ -1,29 +1,54 @@
-function DiagnosticList() {
+function DiagnosticList({
+  diagnostics,
+}) {
   return (
-    <section className="diagnostic-list">
+    <section className="panel diagnostic-panel">
+      <h2 className="section-title">
+        Diagnostic List
+      </h2>
 
-      <h2>Diagnostic List</h2>
+      {!diagnostics.length ? (
+        <p className="empty-state">
+          No diagnostic records available.
+        </p>
+      ) : (
+        <div className="diagnostic-table-wrapper">
+          <table className="diagnostic-table">
+            <thead>
+              <tr>
+                <th>Problem/Diagnosis</th>
+                <th>Description</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-      <table>
+            <tbody>
+              {diagnostics.map(
+                (diagnosis, index) => (
+                  <tr
+                    key={`${diagnosis.name}-${index}`}
+                  >
+                    <td>
+                      {diagnosis.name ||
+                        "—"}
+                    </td>
 
-        <thead>
-          <tr>
-            <th>Problem/Diagnosis</th>
-            <th>Description</th>
-            <th>Status</th>
-          </tr>
-        </thead>
+                    <td>
+                      {diagnosis.description ||
+                        "—"}
+                    </td>
 
-        <tbody>
-          <tr>
-            <td>Hypertension</td>
-            <td>Chronic high blood pressure</td>
-            <td>Under Observation</td>
-          </tr>
-        </tbody>
-
-      </table>
-
+                    <td>
+                      {diagnosis.status ||
+                        "—"}
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </section>
   );
 }
